@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
 export default function CartPage() {
@@ -67,7 +68,7 @@ export default function CartPage() {
           </button>
         </div>
       </div>
-
+      < Recommendation /> 
       <Footer />
     </div>
   );
