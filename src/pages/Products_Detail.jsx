@@ -7,6 +7,20 @@ import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
 const Products_Detail = () => {
+
+  const handleAddToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const itemIndex = cart.findIndex((item) => item.id === id);
+    if (itemIndex > -1) {
+      cart[itemIndex].quantity += 1;
+    } else {
+      cart.push({ id, name: product.name, price: product.price, quantity: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    window.dispatchEvent(new Event("storage")); // trigger update
+  };
+
+
   const [quantity, setQuantity] = useState(1);
 
   const increase = () => setQuantity((prev) => prev + 1);
@@ -46,7 +60,7 @@ const Products_Detail = () => {
             {product.product_name}
           </h1>
           <p className="text-lg text-[#806B07] font-bold mb-4 inter">
-            {product.price}
+            ${product.price.toFixed(2)}
           </p>
 
           {/* Color Options */}
@@ -92,7 +106,7 @@ const Products_Detail = () => {
           </div>
 
           {/* Add to Cart Button */}
-          <button className="w-full bg-black text-[#FFFFFF] py-3 items-center inline-flex justify-center rounded hover:bg-gray-900 transition inter">
+          <button className="w-full bg-black text-[#FFFFFF] py-3 items-center inline-flex justify-center rounded hover:bg-gray-900 transition inter"  onClick={handleAddToCart}>
             ADD TO CART
             <ShoppingCart className="w-6 h-6 text-white" />
           </button>

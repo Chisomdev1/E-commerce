@@ -1,14 +1,105 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
 export default function Checkout() {
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(stored);
+  }, []);
+
+  const updateCart = (newCart) => {
+    setCart(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  const increaseQty = (id) => {
+    const updated = cart.map(item =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+    updateCart(updated);
+  };
+
+  const decreaseQty = (id) => {
+    const updated = cart
+      .map(item => item.id === id ? { ...item, quantity: item.quantity - 1 } : item)
+      .filter(item => item.quantity > 0);
+    updateCart(updated);
+  };
+
+  const removeItem = (id) => {
+    const updated = cart.filter(item => item.id !== id);
+    updateCart(updated);
+  };
+
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <div className="">
       <Navbar />
-      <div className="flex flex-col md:flex-row p-4 gap-6 inter">
+      <div className="flex flex-col md:flex-row mt-[7rem] p-4 gap-6 inter">
         {/* Cart Items */}
+
+        {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <>
+          <ul className="space-y-4">
+            {cart.map((item) => (
+              <li
+                key={item.id}
+                className="border p-4 rounded shadow-sm flex items-center justify-between gap-4"
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-20 h-20 object-cover rounded"
+                />
+                <div className="flex-1">
+                  <h2 className="font-medium text-lg">{item.name}</h2>
+                  <p className="text-sm text-gray-500">Color: {item.color}</p>
+                  <p className="text-sm text-gray-600">
+                    Price: ${item.price.toFixed(2)}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => decreaseQty(item.id)}
+                    className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
+                  >
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    onClick={() => increaseQty(item.id)}
+                    className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="text-right font-medium w-24">
+                  ${(item.price * item.quantity).toFixed(2)}
+                </div>
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="text-red-500 hover:text-red-700 text-sm"
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-6 text-xl font-semibold text-right">
+            Total: ${total.toFixed(2)}
+          </div>
+        </>
+      )}
+
         <div className="w-full md:w-2/3 mt-[7rem]">
           {[1, 2].map((item, index) => (
             <div
@@ -61,14 +152,14 @@ export default function Checkout() {
             <span>
               Cart Total <span className="text-sm">(2 items)</span>
             </span>
-            <span>₦1000.00</span>
+            <span>${total.toFixed(2)}</span>
           </div>
           <button className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500">
             CHECKOUT
           </button>
         </div>
       </div>
-      < Recommendation /> 
+      <Recommendation />
       <Footer />
     </div>
   );

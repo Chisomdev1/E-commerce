@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import CartIcon from "./CartIcon";
+
 import logo from "../assets/image/logo.png";
 
 const Navbar = () => {
@@ -47,7 +49,7 @@ const Navbar = () => {
 
             {/* Icons */}
             <div className="flex space-x-4 items-center">
-              <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer" />
+              <CartIcon className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer" />
             </div>
           </div>
 
