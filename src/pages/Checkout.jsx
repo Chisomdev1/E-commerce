@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
-export default function CartPage() {
+export default function Checkout() {
   return (
     <div className="">
       <Navbar />
