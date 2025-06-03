@@ -21,7 +21,7 @@ const Home = () => {
       <Navbar />
       {/* Header Section */}
 
-      <div className="md:mt-[7rem] mt-[7.5rem]">
+      <div className="md:mt-[7rem] mt-[7.6rem] ">
         <img
           src={image1}
           alt="Beaded Bag"
