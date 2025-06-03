@@ -45,7 +45,7 @@ export default function CustomerAddressCard() {
         },
         body: JSON.stringify(formData),
       });
-      alert('Checkout info sent!');
+      window.location.href = '/accountdetail';
     } catch {
       alert('Failed to send checkout info');
     }
