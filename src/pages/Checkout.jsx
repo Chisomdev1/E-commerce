@@ -123,7 +123,7 @@ export default function Checkout() {
             <span>
               Cart Total <span className="text-sm">({cart.length} items)</span>
             </span>
-            <span>${total.toFixed(2)}</span>
+            <span>₦{total.toFixed(2)}</span>
           </div>
           <button
             className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500"

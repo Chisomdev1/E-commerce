@@ -7,7 +7,7 @@ export const initializeProducts = () => {
       product_name: "Laptops",
       category: "Electronics",
       description: "A high-performance laptop for work and play.",
-      price: 550000,
+      price: 55000,
       product_image: "/assets/image/beaded_bag.jpg", // Use a public path or static folder
     },
     {

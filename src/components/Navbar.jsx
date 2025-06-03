@@ -83,7 +83,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Category Scroll Menu */}
-        <div className="md:hidden flex px-3 py-2 space-x-2 border-t text-[13px] font-medium poppins">
+        <div className="md:hidden flex px-5 py-2 space-x-2 border-t text-[13px] font-medium poppins">
           <a href="#" className="whitespace-nowrap">
             Beaded Bags
           </a>
@@ -120,7 +120,6 @@ const Navbar = () => {
             "Beaded Bracelet",
             "Beaded Necklace",
             "Beaded Tops",
-            "About",
           ].map((item) => (
             <a
               href="#"
