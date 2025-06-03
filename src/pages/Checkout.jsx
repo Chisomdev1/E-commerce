@@ -78,7 +78,7 @@ export default function Checkout() {
                       name : {item.product_name}
                     </h2>
                     <p className="text-sm text-gray-500">Color: {item.color}</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 inline-flex items-center">
                       Price: {item.price.toFixed(2)}
                     </p>
                   </div>
@@ -100,12 +100,16 @@ export default function Checkout() {
                   <div className="text-right font-medium w-24">
                     {(item.price * item.quantity).toFixed(2)}
                   </div>
-                  <button
-                    onClick={() => removeItem(item.id)}
-                    className="text-red-500 hover:text-red-700 text-sm"
-                  >
-                    Remove
-                  </button>
+
+
+                  <div className="text-sm text-gray-500 mt-2 justify-end flex gap-4">
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="text-red-500 hover:text-red-700 text-sm inline-block"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -116,8 +120,8 @@ export default function Checkout() {
         <div className="w-full md:w-1/3 border p-4 rounded shadow-sm">
           <h2 className="font-semibold text-lg mb-4">Order Summary</h2>
           <div className="flex justify-between text-sm mb-2">
-          <span>Subtotal</span>
-          <span>₦{total.toFixed(2)}</span>
+            <span>Subtotal</span>
+            <span>₦{total.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-base font-bold mb-4">
             <span>
