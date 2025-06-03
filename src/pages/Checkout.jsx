@@ -127,7 +127,7 @@ export default function Checkout() {
           </div>
           <button
             className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500"
-            onClick={() => navigate("/shippinginfo")}
+            onClick={() => navigate("/accountdetail")}
           >
             CHECKOUT
           </button>
