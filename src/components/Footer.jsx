@@ -7,16 +7,16 @@ const Footer = () => {
     <footer className="bg-[#f7f7f7] text-black px-6 py-12 grid md:grid-cols-2 inter">
       {/* Top Features */}
       <div className="flex flex-wrap justify-around border-b pb-8 mb-8 md:mr-9">
-        <Feature icon={<FaStar />} label="Newly made for you" />
+        <Feature img={<FaStar />} label="Newly made for you" />
         <Feature icon={<FaShieldAlt />} label="Safe & Trustworthy" />
         <Feature icon={<FaTruck />} label="Fast Delivery" />
         <Feature icon={<FaSmile />} label="Friendly Services" />
       </div>
 
       {/* Bottom Footer Content */}
-      <div className="flex flex-wrap items-start justify-between">
+      <div className="flex flex-wrap items-start justify-between md:w-[89%]">
         {/* Contacts */}
-        <div className="mb-6">
+        <div className="md:mb-4 ">
           <h3 className="font-bold mb-2">Contacts</h3>
           <ul className="space-y-1">
             <li><a href="#" className="hover:underline">Instagram</a></li>
@@ -27,7 +27,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-        <div className="mb-6">
+        <div className="md:mb-4">
           <h3 className="font-bold mb-2">Quick Links</h3>
           <ul>
             <li><a href="#" className="hover:underline font-semibold">About</a></li>
@@ -36,7 +36,7 @@ const Footer = () => {
 
         {/* Beaded Image with Logo Text */}
         <div className="w-full md:w-auto">
-          <div className="relative w-[200px] h-[200px]">
+          <div className="relative w-[290px] h-[270px]">
             <img
               src={beadImage}
               alt="Beaded Design"

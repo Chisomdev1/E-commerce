@@ -1,16 +1,14 @@
-// utils/localStorage.js
 
-import product_image from "../assets/image/beaded_bag.jpg";
 
 export const initializeProducts = () => {
   const products = [
     {
       id: 1,
-      product_name: "Laptop",
+      product_name: "Laptops",
       category: "Electronics",
       description: "A high-performance laptop for work and play.",
       price: 550000,
-      image: product_image,
+      product_image: "/assets/image/beaded_bag.jpg", // Use a public path or static folder
     },
     {
       id: 2,
@@ -18,7 +16,7 @@ export const initializeProducts = () => {
       category: "Footwear",
       description: "Comfortable shoes for daily runs.",
       price: 80,
-      image: product_image,
+      image: "/assets/image/beaded_bag.jpg",
     },
     {
       id: 3,
@@ -26,7 +24,7 @@ export const initializeProducts = () => {
       category: "Appliances",
       description: "Brew the perfect cup of coffee every morning.",
       price: 100,
-      image: product_image,
+      image: "/assets/image/beaded_bag.jpg",
     },
     {
       id: 4,
@@ -34,9 +32,11 @@ export const initializeProducts = () => {
       category: "Accessories",
       description: "Durable and spacious for daily use.",
       price: 45,
-      image: product_image,
+      product_image: "/assets/image/beaded_bag.jpg",
     },
   ];
 
   localStorage.setItem("products", JSON.stringify(products));
 };
+
+
