@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -11,6 +11,24 @@ const PaymentInfo = () => {
       setTimeout(() => setCopiedField(""), 2000);
     });
   };
+
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("cart")) || [];
+    const sanitized = stored.map((item) => ({
+      ...item,
+      price: typeof item.price === "number" ? item.price : 0,
+      quantity: typeof item.quantity === "number" ? item.quantity : 1,
+    }));
+    setCart(sanitized);
+  }, []);
+
+  const total = cart.reduce((acc, item) => {
+    const price = typeof item.price === "number" ? item.price : 0;
+    const quantity = typeof item.quantity === "number" ? item.quantity : 0;
+    return acc + price * quantity;
+  }, 0);
 
   return (
     <div className="min-h-screen bg-[#fffdf5] flex flex-col justify-between">
@@ -65,10 +83,10 @@ const PaymentInfo = () => {
             <div>
               <p className="text-gray-500 text-sm">Grand Total</p>
               <div className="flex justify-between items-center">
-                <p className="text-xl font-bold">₦1000.00</p>
+                <p className="text-xl font-bold">₦{total.toFixed(2)}</p>
                 <div className="flex items-center space-x-2">
                   <button
-                    onClick={() => handleCopy("1000.00", "amount")}
+                    onClick={() => handleCopy(total.toFixed(2), "amount")}
                     className="text-sm text-yellow-600 border border-yellow-600 rounded px-2 py-1 hover:bg-yellow-100"
                   >
                     Copy Amount
@@ -83,9 +101,9 @@ const PaymentInfo = () => {
             {/* Instruction + WhatsApp Link */}
             <p className="text-xs text-gray-600 mt-4">
               Please kindly transfer the exact amount of{" "}
-              <span className="text-yellow-600 font-medium">₦1000.00</span> to avoid cancellation of your order, and click{" "}
+              <span className="text-yellow-600 font-medium">{total.toFixed(2)}</span> to avoid cancellation of your order, and click{" "}
               <a
-                href="https://wa.me/2348012345678?text=Hello%2C%20I%20just%20made%20a%20payment%20of%20%E2%82%A61000.00%20to%20Omoflexy%20Bead%20Empire."
+                href="https://wa.me/2348020895339?text=Hello%2C%20I%20just%20made%20a%20payment%20of%20%E2%82%A61000.00%20to%20Omoflexy%20Bead%20Empire."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-yellow-600 font-medium underline cursor-pointer"
