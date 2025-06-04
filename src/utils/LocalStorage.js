@@ -8,7 +8,7 @@ export const initializeProducts = () => {
       category: "Electronics",
       description: "A high-performance laptop for work and play.",
       price: 55000,
-      product_image: "/assets/image/beaded_bag.jpg", // Use a public path or static folder
+      product_image: "https://collection.cloudinary.com/drlo1vbps/3a68ebb0b2736ce000c07a99190458c1", // Use a public path or static folder
     },
     {
       id: 2,

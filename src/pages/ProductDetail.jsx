@@ -7,13 +7,21 @@ import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
 const ProductDetail = () => {
+
   const handleAddToCart = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const itemIndex = cart.findIndex((item) => item.id === id);
+    const itemIndex = cart.findIndex((item) => item.id === product.id);
     if (itemIndex > -1) {
-      cart[itemIndex].quantity += 1;
+      // If product exists, increase its quantity by the selected amount
+      cart[itemIndex].quantity += quantity;
     } else {
-      cart.push({ id, name: product.name, price: product.price, quantity: 1 });
+      // If product does not exist, add it with the selected quantity
+      cart.push({
+        id: product.id,
+        product_name: product.product_name,
+        price: product.price,
+        quantity: quantity,
+      });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
     window.dispatchEvent(new Event("storage")); // trigger update
@@ -58,7 +66,7 @@ const ProductDetail = () => {
             {product.product_name}
           </h1>
           <p className="text-lg text-[#806B07] font-bold mb-4 inter">
-          ₦{product.price.toFixed(2)}
+            ₦{product.price.toFixed(2)}
           </p>
 
           {/* Color Options */}
@@ -81,7 +89,7 @@ const ProductDetail = () => {
               >
                 –
               </button>
-              <span className="w-8 h-8 flex items-center justify-center rounded-t-none border-gray-300 rounded">
+              <span className="w-8 h-8 flex items-center justify-center rounded-t-none border-gray-300 rounded" >
                 {quantity}
               </span>
               <button

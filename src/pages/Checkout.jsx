@@ -14,6 +14,7 @@ export default function Checkout() {
     const stored = JSON.parse(localStorage.getItem("cart")) || [];
     const sanitized = stored.map((item) => ({
       ...item,
+      product_name: item.product_name || "Unnamed Product",
       price: typeof item.price === "number" ? item.price : 0,
       quantity: typeof item.quantity === "number" ? item.quantity : 1,
     }));
@@ -75,7 +76,7 @@ export default function Checkout() {
                   />
                   <div className="flex-1">
                     <h2 className="font-medium text-lg">
-                      name : {item.product_name}
+                      {item.product_name}
                     </h2>
                     <p className="text-sm text-gray-500">Color: {item.color}</p>
                     <p className="text-sm text-gray-600 inline-flex items-center">
