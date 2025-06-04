@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import CartIcon from "./CartIcon";
 import logo from "../assets/image/logo.png";
+import NavbarSearch from "./NavbarSearch";
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -47,8 +48,8 @@ const Navbar = () => {
             <div className="md:hidden flex space-x-4 items-center">
               <CartIcon className="w-6 h-6 text-gray-700 cursor-pointer" />
               <div className="bg-black rounded-[20px] p-1 ml-2">
-                  <Search className="w-5 h-5 text-white cursor-pointer" />
-                </div>
+                <NavbarSearch className="w-2 h-2 text-white cursor-pointer" />
+              </div>
             </div>
 
             {/* Desktop Menu */}
@@ -67,16 +68,7 @@ const Navbar = () => {
               </a>
 
               {/* Search + Cart */}
-              <div className="ml-4 px-3 py-1 border border-gray-300 rounded-[20px] focus:outline-none focus:ring-2 poppins focus:ring-blue-500 inline-flex items-center">
-                <input
-                  type="text"
-                  placeholder="Search for Beads"
-                  className="outline-none text-sm"
-                />
-                <div className="bg-black rounded-[20px] p-1 ml-2">
-                  <Search className="w-5 h-5 text-white cursor-pointer" />
-                </div>
-              </div>
+              <NavbarSearch />
               <CartIcon className="w-6 h-6 text-gray-700 hover:text-blue-600 cursor-pointer" />
             </div>
           </div>

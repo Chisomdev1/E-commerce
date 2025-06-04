@@ -4,7 +4,7 @@ export const initializeProducts = () => {
   const products = [
     {
       id: 1,
-      product_name: "Laptops",
+      product_name: "Laptop",
       category: "Electronics",
       description: "A high-performance laptop for work and play.",
       price: 55000,
@@ -34,9 +34,20 @@ export const initializeProducts = () => {
       price: 45,
       product_image: "/assets/image/beaded_bag.jpg",
     },
+    {
+      id: 5,
+      product_name: "Puma",
+      category: "Footwear",
+      description: "Comfortable shoes for daily runs.",
+      price: 2900,
+      image: "/assets/image/beaded_bag.jpg",
+    },
   ];
 
   localStorage.setItem("products", JSON.stringify(products));
 };
 
 
+export function getProducts() {
+  return JSON.parse(localStorage.getItem('products')) || [];
+}
