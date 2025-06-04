@@ -19,7 +19,7 @@ const Recommendation = () => {
     <div className="px-4 md:px-16 py-8">
       <h2 className="text-xl font-semibold mb-6 inter">You may also like</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {products.map(
+        {products.slice(0, 4).map(
           ({ id, product_name, category, price, product_image }) => (
             <Link to={`/product/${id}`} key={id} className="">
               <div className="w-full h-40 bg-white flex items-center justify-center mb-4 relative">

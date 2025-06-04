@@ -34,6 +34,7 @@ export const initializeProducts = () => {
       price: 45,
       product_image: "/assets/image/beaded_bag.jpg",
     },
+
     {
       id: 5,
       product_name: "Puma",
@@ -42,6 +43,34 @@ export const initializeProducts = () => {
       price: 2900,
       image: "/assets/image/beaded_bag.jpg",
     },
+
+    {
+      id: 6,
+      product_name: "Phone",
+      category: "Electronics",
+      description: "A high-performance laptop for work and play.",
+      price: 25000,
+      product_image: "/assets/image/beaded_bag.jpg", // Use a public path or static folder
+    },
+
+    {
+      id: 7,
+      product_name: "Washing machine",
+      category: "Appliances",
+      description: "Brew the perfect cup of coffee every morning.",
+      price: 10000,
+      image: "/assets/image/beaded_bag.jpg",
+    },
+
+    {
+      id: 8,
+      product_name: "Necklace",
+      category: "Accessories",
+      description: "Durable and spacious for daily use.",
+      price: 5000,
+      product_image: "/assets/image/beaded_bag.jpg",
+    },
+
   ];
 
   localStorage.setItem("products", JSON.stringify(products));

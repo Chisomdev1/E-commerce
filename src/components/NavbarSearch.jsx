@@ -45,15 +45,28 @@ const NavbarSearch = () => {
     }
 
     const products = getProducts();
+
+    // Filter products based on query
     const filtered = products.filter(
       (product) =>
         (product.name && product.name.toLowerCase().includes(query.toLowerCase())) ||
         (product.category && product.category.toLowerCase().includes(query.toLowerCase()))
     );
-    setSuggestions(filtered.slice(0, 5));
+
+    // Get unique categories from filtered products
+    const uniqueCategories = Array.from(
+      new Set(filtered.map((product) => product.category))
+    );
+
+    // Prepare suggestions: one per category
+    const categorySuggestions = uniqueCategories.map((category) => {
+      // Find a representative product for each category
+      const product = filtered.find((p) => p.category === category);
+      return { ...product, category };
+    });
+
+    setSuggestions(categorySuggestions);
   }, [query]);
-
-
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -65,12 +78,7 @@ const NavbarSearch = () => {
     }
   };
 
-  const handleSuggestionClick = (product) => {
-    navigate(`/product/${product.id}`);
-    setQuery('');
-    setSuggestions([]);
-    setShowMobileSearch(false);
-  };
+  // Removed unused handleSuggestionClick function
 
   const handleMobileSearchClick = () => {
     setShowMobileSearch(true);
@@ -82,7 +90,7 @@ const NavbarSearch = () => {
 
   return (
     <div className="flex items-center" ref={searchRef}>
-      {/* Desktop Search - Always rendered but hidden on mobile */}
+      
       <div className={`hidden md:block ${showMobileSearch ? 'hidden' : 'block'}`}>
         <form onSubmit={handleSearch} className="">
           <div
@@ -92,7 +100,7 @@ const NavbarSearch = () => {
           >
             <input
               type="text"
-              placeholder="Search products, brands and categories"
+              placeholder="Search beads"
               className="focus:outline-none"
             />
             <button
@@ -119,14 +127,17 @@ const NavbarSearch = () => {
           {suggestions.length > 0 && (
             <div className="absolute z-10 mt-1 w-full rounded-md border border-gray-300 bg-white shadow-lg">
               <ul className="py-1">
-                {suggestions.map((product) => (
+                {suggestions.map((suggestion) => (
                   <li
-                    key={product.id}
+                    key={suggestion.category}
+                    onClick={() => {
+                      navigate(`/search?q=${encodeURIComponent(suggestion.category)}`);
+                      setShowMobileSearch(false);
+                      setQuery('');
+                    }}
                     className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                    onClick={() => handleSuggestionClick(product)}
                   >
-                    <div className="font-medium text-gray-900">{product.name}</div>
-                    <div className="text-sm text-gray-500">{product.category}</div>
+                    <div className="font-medium text-gray-900">{suggestion.category}</div>
                   </li>
                 ))}
               </ul>
@@ -183,7 +194,7 @@ const NavbarSearch = () => {
           <form onSubmit={handleSearch} className="flex-1">
             <input
               type="text"
-              placeholder="Search products, brands and categories"
+              placeholder="Search beads"
               className="w-full rounded-[20px] border border-gray-300 py-2 px-4 focus:outline-none"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -193,14 +204,17 @@ const NavbarSearch = () => {
           {suggestions.length > 0 && (
             <div className="absolute left-0 right-0 top-full z-10 mt-1 rounded-md border border-gray-300 bg-white shadow-lg">
               <ul className="py-1">
-                {suggestions.map((product) => (
+                {suggestions.map((suggestion) => (
                   <li
-                    key={product.id}
+                    key={suggestion.category}
+                    onClick={() => {
+                      navigate(`/search?q=${encodeURIComponent(suggestion.category)}`);
+                      setShowMobileSearch(false);
+                      setQuery('');
+                    }}
                     className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-                    onClick={() => handleSuggestionClick(product)}
                   >
-                    <div className="font-medium text-gray-900">{product.name}</div>
-                    <div className="text-sm text-gray-500">{product.category}</div>
+                    <div className="font-medium text-gray-900">{suggestion.category}</div>
                   </li>
                 ))}
               </ul>

@@ -74,7 +74,7 @@ export default function CustomerAddressCard() {
   return (
     <div>
       <Navbar />
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 mt-4 inter">
+      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 inter md:mt-[7rem] mt-[7.6rem]">
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-gray-700 font-semibold">CUSTOMER ADDRESS</h2>
           {!isEditing && (

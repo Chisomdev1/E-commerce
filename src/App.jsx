@@ -8,6 +8,8 @@ import ShippingInfo from "./pages/Shipping_Info";
 import AccountDetail from "./pages/Account_Details";
 import { initializeProducts } from "./utils/LocalStorage";
 import { useEffect } from "react";
+
+
 const App = () => {
 
   useEffect(() => {
