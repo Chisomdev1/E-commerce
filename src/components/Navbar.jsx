@@ -114,7 +114,7 @@ const Navbar = () => {
             "Beaded Tops",
           ].map((item) => (
             <a
-              href="#"
+              href={item === "Home" ? "/" : "#"}
               key={item}
               className="flex justify-between items-center px-4 py-3 hover:bg-gray-100"
             >

@@ -71,11 +71,11 @@ const SearchPage = () => {
             ))}
           </div>
         ) : searchQuery ? (
-          <div className="text-center text-gray-500">
+          <div className="text-center text-gray-500 inter">
             No results found for "{searchQuery}"
           </div>
         ) : (
-          <div className="text-center text-gray-500">
+          <div className="text-center text-gray-500 inter">
             Enter a search term to find products
           </div>
         )}

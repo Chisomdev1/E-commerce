@@ -1,4 +1,4 @@
-
+import image from "../assets/image/beaded_bag.jpg";
 
 export const initializeProducts = () => {
   const products = [
@@ -16,7 +16,7 @@ export const initializeProducts = () => {
       category: "Footwear",
       description: "Comfortable shoes for daily runs.",
       price: 80,
-      image: "/assets/image/beaded_bag.jpg",
+      product_image: {image}, // Use a public path or static folder
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ export const initializeProducts = () => {
       category: "Appliances",
       description: "Brew the perfect cup of coffee every morning.",
       price: 100,
-      image: "/assets/image/beaded_bag.jpg",
+      product_image: "/assets/image/beaded_bag.jpg",
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ export const initializeProducts = () => {
       category: "Footwear",
       description: "Comfortable shoes for daily runs.",
       price: 2900,
-      image: "/assets/image/beaded_bag.jpg",
+      product_image: "/assets/image/beaded_bag.jpg",
     },
 
     {
@@ -59,7 +59,7 @@ export const initializeProducts = () => {
       category: "Appliances",
       description: "Brew the perfect cup of coffee every morning.",
       price: 10000,
-      image: "/assets/image/beaded_bag.jpg",
+      product_image: "/assets/image/beaded_bag.jpg",
     },
 
     {
