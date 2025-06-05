@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import CartIcon from "./CartIcon";
 import logo from "../assets/image/logo.png";
-import NavbarSearch from "./NavbarSearch"; 
+import NavbarSearch from "./NavbarSearch";
 import { useNavigate } from "react-router-dom";
 
 
@@ -93,7 +93,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Category Scroll Menu */}
-        <div className="md:hidden flex px-5 py-2 space-x-2 border-t text-[13px] font-medium poppins">
+        <div className="md:hidden flex w-full justify-center py-2 space-x-2 border-t text-[13px] font-medium poppins">
           <button
             className="whitespace-nowrap"
             onClick={() => navigate(`/search?q=Beaded Bag`)}
