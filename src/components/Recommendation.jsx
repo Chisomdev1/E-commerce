@@ -29,7 +29,7 @@ const Recommendation = () => {
                 <img
                   src={product_image}
                   alt={product_name}
-                  className="w-100 h-100 object-contain"
+                  className="w-50 h-20"
                 />
               </div>
               <div className="bg-[#FEF9E9] p-4">

@@ -46,6 +46,7 @@ const PaymentInfo = () => {
           </div>
 
           <div className="space-y-4">
+            
             {/* Account Number */}
             <div>
               <p className="text-gray-500 text-sm">Account Number</p>

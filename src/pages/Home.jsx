@@ -34,7 +34,7 @@ const Home = () => {
         <h2 className="text-xl font-semibold mb-6 inter">🔥 Trending Beads</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {products.map(
-            ({ id, product_name, category, price, product_image }) => (
+            ({ id, product_name, category, price, image }) => (
               <Link
                 to={`/product/${id}`}
                 key={id}
@@ -45,9 +45,9 @@ const Home = () => {
                 🔥
               </span>
                   <img
-                    src={product_image}
+                    src={image}
                     alt={product_name}
-                    className="w-100 h-100 object-contain"
+                    className="w-100 h-80 object-contain"
                   />
                 </div>
                 <div className="bg-[#FEF9E9] p-4">

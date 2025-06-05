@@ -1,4 +1,4 @@
-import image from "../assets/image/beaded_bag.jpg";
+import beadedBracelet from '../assets/image/beaded-bracelet1.jpg';
 
 export const initializeProducts = () => {
   const products = [
@@ -7,8 +7,8 @@ export const initializeProducts = () => {
       product_name: "Laptop",
       category: "Electronics",
       description: "A high-performance laptop for work and play.",
-      price: 55000,
-      product_image: "https://collection.cloudinary.com/drlo1vbps/3a68ebb0b2736ce000c07a99190458c1", // Use a public path or static folder
+      price: 5200,
+      product_image: beadedBracelet, // Use a public path or static folder
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ export const initializeProducts = () => {
       category: "Footwear",
       description: "Comfortable shoes for daily runs.",
       price: 80,
-      product_image: {image}, // Use a public path or static folder
+      image: "./assets/image/beaded_bag.jpg", // Use a public path or static folder
     },
     {
       id: 3,
