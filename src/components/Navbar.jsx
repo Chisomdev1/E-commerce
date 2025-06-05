@@ -3,17 +3,22 @@ import {
   ChevronRight,
   Menu,
   X,
-  Search,
-  Home,
-  ShoppingCart,
-  MessageCircle,
 } from "lucide-react";
 import CartIcon from "./CartIcon";
 import logo from "../assets/image/logo.png";
-import NavbarSearch from "./NavbarSearch";
+import NavbarSearch from "./NavbarSearch"; import { useNavigate } from "react-router-dom";
+
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const categories = [
+    "Beaded Bags",
+    "Beaded Bracelet",
+    "Beaded Necklace",
+    "Beaded Tops",
+  ];
 
   return (
     <>
@@ -54,18 +59,30 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-4 items-center poppins">
-              <a href="#" className="text-gray-700 hover:text-blue-600">
+              <button
+                className="text-gray-700 hover:text-blue-600"
+                onClick={() => navigate(`/search?q=Beaded Bag`)}
+              >
                 Beaded Bags |
-              </a>
-              <a href="#" className="text-gray-700 hover:text-blue-600">
+              </button>
+              <button
+                className="text-gray-700 hover:text-blue-600"
+                onClick={() => navigate(`/search?q=Beaded Bracelet`)}
+              >
                 Beaded Bracelet |
-              </a>
-              <a href="#" className="text-gray-700 hover:text-blue-600">
+              </button>
+              <button
+                className="text-gray-700 hover:text-blue-600"
+                onClick={() => navigate(`/search?q=Beaded Necklace`)}
+              >
                 Beaded Necklace |
-              </a>
-              <a href="#" className="text-gray-700 hover:text-blue-600">
+              </button>
+              <button
+                className="text-gray-700 hover:text-blue-600"
+                onClick={() => navigate(`/search?q=Beaded Top`)}
+              >
                 Beaded Top
-              </a>
+              </button>
 
               {/* Search + Cart */}
               <NavbarSearch />
@@ -76,18 +93,30 @@ const Navbar = () => {
 
         {/* Mobile Category Scroll Menu */}
         <div className="md:hidden flex px-5 py-2 space-x-2 border-t text-[13px] font-medium poppins">
-          <a href="#" className="whitespace-nowrap">
+          <button
+            className="whitespace-nowrap"
+            onClick={() => navigate(`/search?q=Beaded Bag`)}
+          >
             Beaded Bags
-          </a>
-          <a href="#" className="whitespace-nowrap">
+          </button>
+          <button
+            className="whitespace-nowrap"
+            onClick={() => navigate(`/search?q=Beaded Bracelet`)}
+          >
             Beaded <br /> Bracelet
-          </a>
-          <a href="#" className="whitespace-nowrap">
+          </button>
+          <button
+            className="whitespace-nowrap"
+            onClick={() => navigate(`/search?q=Beaded Necklace`)}
+          >
             Beaded <br /> Necklace
-          </a>
-          <a href="#" className="whitespace-nowrap">
+          </button>
+          <button
+            className="whitespace-nowrap"
+            onClick={() => navigate(`/search?q=Beaded Top`)}
+          >
             Beaded Tops
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -106,21 +135,22 @@ const Navbar = () => {
         </div>
 
         <div className="flex flex-col mt-2 inter">
-          {[
-            "Home",
-            "Beaded Bags",
-            "Beaded Bracelet",
-            "Beaded Necklace",
-            "Beaded Tops",
-          ].map((item) => (
-            <a
-              href={item === "Home" ? "/" : "#"}
+          {["Home", ...categories].map((item) => (
+            <button
               key={item}
-              className="flex justify-between items-center px-4 py-3 hover:bg-gray-100"
+              className="flex justify-between items-center px-4 py-3 hover:bg-gray-100 text-left"
+              onClick={() => {
+                if (item === "Home") {
+                  navigate("/");
+                } else {
+                  navigate(`/search?q=${encodeURIComponent(item)}`);
+                }
+                setMobileMenuOpen(false); // Close menu
+              }}
             >
               <span>{item}</span>
               <ChevronRight className="w-5 h-5" />
-            </a>
+            </button>
           ))}
         </div>
 

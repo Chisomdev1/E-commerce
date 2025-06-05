@@ -36,26 +36,26 @@ const SearchPage = () => {
 
 
       <div className="p-4 md:mt-[7rem] mt-[7.6rem]">
-        <h1 className="mb-4 text-xl font-semibold">
+        <h1 className="mb-4 text-xl font-semibold inter">
           Search Results for "{searchQuery}"
         </h1>
 
         {results.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {results.map((product) => (
               <div
                 key={product.id}
                 className="cursor-pointer"
                 onClick={() => navigate(`/product/${product.id}`)}
               >
-                <div className="w-full h-40 bg-white flex items-center justify-center mb-4 relative">
+                <div className="w-full h-40 bg-white flex items-center justify-center relative">
                   <span className="absolute top-2 left-2 bg-[#F4EBD0] text-white text-xs px-1 py-1 rounded-[4px]">
                     🔥
                   </span>
                   <img
                     src={product.product_image}
                     alt={product.product_name}
-                    className="w-100 h-100 object-contain"
+                    className="w-[100%] h-[100%]"
                   />
                 </div>
                 <div className="bg-[#FEF9E9] p-4">
