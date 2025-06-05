@@ -6,7 +6,8 @@ import {
 } from "lucide-react";
 import CartIcon from "./CartIcon";
 import logo from "../assets/image/logo.png";
-import NavbarSearch from "./NavbarSearch"; import { useNavigate } from "react-router-dom";
+import NavbarSearch from "./NavbarSearch"; 
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -14,10 +15,10 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const categories = [
-    "Beaded Bags",
+    "Beaded Bag",
     "Beaded Bracelet",
     "Beaded Necklace",
-    "Beaded Tops",
+    "Beaded Top",
   ];
 
   return (
@@ -157,7 +158,7 @@ const Navbar = () => {
         {/* Bottom Icon Links */}
         <div className="absolute bottom-0 w-full border-t p-4 flex justify-around bg-white">
           <a
-            href="#"
+            href="/"
             className="flex flex-col items-center text-sm text-gray-700"
           >
             <svg
@@ -181,7 +182,7 @@ const Navbar = () => {
             </svg>
           </a>
           <a
-            href="https://wa.me/234XXXXXXXXXX" // Replace with your WhatsApp number
+            href="https://wa.me/2348020895339" // Replace with your WhatsApp number
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center text-sm text-gray-700"

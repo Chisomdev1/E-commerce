@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
+import { getProducts } from "../utils/LocalStorage"; // or your actual import
+import { ToastContainer, toast } from 'react-toastify'
+
+
 
 export default function Checkout() {
   const navigate = useNavigate();
@@ -20,6 +24,11 @@ export default function Checkout() {
     }));
     setCart(sanitized);
   }, []);
+
+  const colors = cart.map(item => {
+    const product = getProducts().find(p => p.id === item.id);
+    return product?.colors || [];
+  });
 
   const updateCart = (newCart) => {
     setCart(newCart);
@@ -54,23 +63,28 @@ export default function Checkout() {
     return acc + price * quantity;
   }, 0);
 
+
+  const notify = () => toast("Your cart is empty!");
   return (
     <div className="">
       <Navbar />
       <div className="flex flex-col md:flex-row mt-[7rem] p-4 gap-6 inter">
+
+      <ToastContainer toastClassName="poppins" />
+
         {/* Cart Items */}
         {cart.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
           <>
             <ul className="space-y-4">
-              {cart.map((item) => (
+              {cart.map((item, idx) => (
                 <li
                   key={item.id}
                   className="border p-4 rounded shadow-sm flex items-center justify-between gap-4"
                 >
                   <img
-                    src={item.image}
+                    src={item.product_image}
                     alt={item.product_name}
                     className="w-20 h-20 object-cover rounded"
                   />
@@ -78,7 +92,26 @@ export default function Checkout() {
                     <h2 className="font-medium text-lg">
                       {item.product_name}
                     </h2>
-                    <p className="text-sm text-gray-500">Color: {item.color}</p>
+                    <p className="text-sm text-gray-500">
+                      Color:
+                      <select
+                        value={item.color}
+                        onChange={e => {
+                          const newColor = e.target.value;
+                          // Update cart state and localStorage
+                          const updatedCart = [...cart];
+                          updatedCart[idx] = { ...item, color: newColor };
+                          setCart(updatedCart);
+                          localStorage.setItem("cart", JSON.stringify(updatedCart));
+                          window.dispatchEvent(new Event("storage"));
+                        }}
+                        className="ml-2 border rounded px-2 py-1"
+                      >
+                        {colors.map(color => (
+                          <option key={color} value={color}> {color}</option>
+                        ))}
+                      </select>
+                    </p>
                     <p className="text-sm text-gray-600 inline-flex items-center">
                       Price: {item.price.toFixed(2)}
                     </p>
@@ -130,9 +163,16 @@ export default function Checkout() {
             </span>
             <span>₦{total.toFixed(2)}</span>
           </div>
+
           <button
             className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500"
-            onClick={() => navigate("/shippinginfo")}
+            onClick={() => {
+              if (cart.length === 0) {
+                notify();
+              } else {
+                navigate("/shippinginfo");
+              }
+            }}
           >
             CHECKOUT
           </button>

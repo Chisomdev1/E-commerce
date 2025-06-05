@@ -19,6 +19,7 @@ export const initializeProducts = () => {
       description: "A high-performance laptop for work and play.",
       price: 11200,
       product_image: Bracelet1, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -28,6 +29,7 @@ export const initializeProducts = () => {
       description: "Comfortable shoes for daily runs.",
       price: 9500,
       product_image: Necklace1, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -35,8 +37,9 @@ export const initializeProducts = () => {
       product_name: "Beaded Top",
       category: "Beaded Top",
       description: "Brew the perfect cup of coffee every morning.",
-      price: 100,
+      price: 10000,
       product_image: beadedTop1,
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -44,8 +47,9 @@ export const initializeProducts = () => {
       product_name: "Beaded Bag",
       category: "Beaded Bag",
       description: "Durable and spacious for daily use.",
-      price: 45,
+      price: 4500,
       product_image: beadedBag1,
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -55,6 +59,7 @@ export const initializeProducts = () => {
       description: "A high-performance laptop for work and play.",
       price: 15000,
       product_image: Bracelet2, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -64,6 +69,7 @@ export const initializeProducts = () => {
       description: "Comfortable shoes for daily runs.",
       price: 5000,
       product_image: Necklace2, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -73,6 +79,7 @@ export const initializeProducts = () => {
       description: "Brew the perfect cup of coffee every morning.",
       price: 10000,
       product_image: beadedTop2,
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -82,6 +89,7 @@ export const initializeProducts = () => {
       description: "Durable and spacious for daily use.",
       price: 9400,
       product_image: beadedBag2,
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -91,6 +99,7 @@ export const initializeProducts = () => {
       description: "A high-performance laptop for work and play.",
       price: 12500,
       product_image: Bracelet3, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
 
     {
@@ -100,6 +109,7 @@ export const initializeProducts = () => {
       description: "Comfortable shoes for daily runs.",
       price: 9500,
       product_image: Necklace3, // Use a public path or static folder
+      colors: ["Red", "Blue", "Green"], 
     },
   ];
 

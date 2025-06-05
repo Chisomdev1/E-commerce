@@ -32,7 +32,7 @@ const PaymentInfo = () => {
 
   return (
     <div className="min-h-screen bg-[#fffdf5] flex flex-col justify-between">
-      
+
       <Navbar />
 
       {/* Main Content */}
@@ -46,21 +46,22 @@ const PaymentInfo = () => {
           </div>
 
           <div className="space-y-4">
-            
+
             {/* Account Number */}
             <div>
               <p className="text-gray-500 text-sm">Account Number</p>
               <div className="flex justify-between items-center">
                 <p className="text-xl font-semibold">1222222222</p>
                 <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => handleCopy("1222222222", "account")}
-                    className="text-sm text-yellow-600 border border-yellow-600 rounded px-2 py-1 hover:bg-yellow-100"
-                  >
-                    Copy Account
-                  </button>
-                  {copiedField === "account" && (
+                  {copiedField === "account" ? (
                     <span className="text-green-600 text-xs font-medium">Copied!</span>
+                  ) : (
+                    <button
+                      onClick={() => handleCopy("1222222222", "account")}
+                      className="text-sm text-yellow-600 border border-yellow-600 rounded px-2 py-1 hover:bg-yellow-100"
+                    >
+                      Copy Account
+                    </button>
                   )}
                 </div>
               </div>
@@ -86,14 +87,15 @@ const PaymentInfo = () => {
               <div className="flex justify-between items-center">
                 <p className="text-xl font-bold">₦{total.toFixed(2)}</p>
                 <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => handleCopy(total.toFixed(2), "amount")}
-                    className="text-sm text-yellow-600 border border-yellow-600 rounded px-2 py-1 hover:bg-yellow-100"
-                  >
-                    Copy Amount
-                  </button>
-                  {copiedField === "amount" && (
+                  {copiedField === "amount" ? (
                     <span className="text-green-600 text-xs font-medium">Copied!</span>
+                  ) : (
+                    <button
+                      onClick={() => handleCopy(total.toFixed(2), "amount")}
+                      className="text-sm text-yellow-600 border border-yellow-600 rounded px-2 py-1 hover:bg-yellow-100"
+                    >
+                      Copy Amount
+                    </button>
                   )}
                 </div>
               </div>
@@ -104,7 +106,7 @@ const PaymentInfo = () => {
               Please kindly transfer the exact amount of{" "}
               <span className="text-yellow-600 font-medium">{total.toFixed(2)}</span> to avoid cancellation of your order, and click{" "}
               <a
-                href="https://wa.me/2348020895339?text=Hello%2C%20I%20just%20made%20a%20payment%20of%20%E2%82%A61000.00%20to%20Omoflexy%20Bead%20Empire."
+                href="https://wa.me/2348020895339?text=Hello%2C%20I%20just%20made%20a%20payment%20of%20%E2%82%A6<span>₦{Number(product.price).toFixed(2)}</span>%20to%20Omoflexy%20Bead%20Empire."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-yellow-600 font-medium underline cursor-pointer"

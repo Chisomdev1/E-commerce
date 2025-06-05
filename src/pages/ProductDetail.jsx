@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
-import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import { FaCheck } from "react-icons/fa";
 import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
 
@@ -12,20 +12,24 @@ const ProductDetail = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const itemIndex = cart.findIndex((item) => item.id === product.id);
     if (itemIndex > -1) {
-      // If product exists, increase its quantity by the selected amount
+      // If product exists, increase its quantity
       cart[itemIndex].quantity += quantity;
     } else {
-      // If product does not exist, add it with the selected quantity
+      // If product does not exist, add it with the selected quantity and color
       cart.push({
         id: product.id,
         product_name: product.product_name,
         price: product.price,
         quantity: quantity,
+        color: selectedColor, // Add selected color
+        product_image: product.product_image, // Add product image
       });
     }
     localStorage.setItem("cart", JSON.stringify(cart));
-    window.dispatchEvent(new Event("storage")); // trigger update
+    window.dispatchEvent(new Event("storage")); // Trigger update
   };
+
+  const [selectedColor, setSelectedColor] = useState(null); // Track the selected color
 
   const [quantity, setQuantity] = useState(1);
 
@@ -76,11 +80,26 @@ const ProductDetail = () => {
           <div className="mb-4">
             <span className="font-medium mr-2 inter">Color:</span>
             <div className="flex space-x-2">
-              <button className="w-8 h-8 rounded border border-gray-400 bg-yellow-100"></button>
-              <button className="w-8 h-8 rounded border border-gray-400 bg-pink-100"></button>
-              <button className="w-8 h-8 rounded border border-gray-400 bg-green-100"></button>
+            {product?.colors?.map((color, idx) => (
+            <button
+              key={idx}
+              className="w-8 h-8 rounded border border-gray-400 relative"
+              style={{ backgroundColor: color.toLowerCase() }}
+              onClick={() => setSelectedColor(color)} // Set selected color
+            >
+              {selectedColor === color && (
+                <FaCheck
+                  className="absolute inset-0 m-auto"
+                  style={{
+                    color: color.toLowerCase() === "white" ? "black" : "white", // Check icon color
+                  }}
+                />
+              )}
+            </button>
+          ))}
             </div>
           </div>
+          
 
           {/* Quantity */}
           <div className="mt-4 inter mb-5">

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import { FaEdit } from "react-icons/fa";
+
 
 const defaultData = {
   firstName: "",
@@ -8,6 +11,7 @@ const defaultData = {
   email: "",
   phone: "",
   address: "",
+  state: ""
 };
 
 export default function CustomerAddressCard() {
@@ -50,10 +54,26 @@ export default function CustomerAddressCard() {
     }));
   };
 
-  const handleSave = () => {
-    localStorage.setItem("customerInfo", JSON.stringify(formData));
+  const handleSave = (e) => {
+    e.preventDefault();
+  
+    // Email validation (simple regex)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+  
+    // Phone validation (Nigerian format, starts with +234 or 0 and 11 digits)
+    const phoneRegex = /^(?:\+234|0)[789][01]\d{8}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      toast.error("Please enter a valid Nigerian phone number.");
+      return;
+    }
+  
+    // ...your save logic
     setIsEditing(false);
-    alert("Information saved!");
+    toast.success("Information saved!");
   };
 
   const handleCheckout = async () => {
@@ -65,26 +85,29 @@ export default function CustomerAddressCard() {
         },
         body: JSON.stringify(formData),
       });
+      localStorage.removeItem("cart"); // Clear the cart
       window.location.href = "/accountdetail";
     } catch {
-      alert("Failed to send checkout info");
+      toast.error("Failed to send checkout info");
     }
   };
 
   return (
     <div>
       <Navbar />
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 inter md:mt-[7rem] mt-[7.6rem]">
+      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-4 inter md:mt-[7rem] mb-7 mt-[7.6rem]">
+        <ToastContainer toastClassName="poppins" />
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-gray-700 font-semibold">CUSTOMER ADDRESS</h2>
           {!isEditing && (
-            <button
-              onClick={() => setIsEditing(true)}
-              className="text-orange-500 text-sm font-medium"
-            >
-              Change
-            </button>
-          )}
+  <button
+    onClick={() => setIsEditing(true)}
+    className="text-orange-500 text-sm font-medium flex items-center gap-1"
+  >
+    <FaEdit className="inline-block" />
+    Change
+  </button>
+)}
         </div>
 
         {isEditing ? (
@@ -95,6 +118,7 @@ export default function CustomerAddressCard() {
               value={formData.firstName}
               onChange={handleChange}
               className="w-full border p-2 rounded"
+              type="text"
             />
             <input
               name="lastName"
@@ -102,6 +126,7 @@ export default function CustomerAddressCard() {
               value={formData.lastName}
               onChange={handleChange}
               className="w-full border p-2 rounded"
+              type="text"
             />
             <input
               name="email"
@@ -109,15 +134,18 @@ export default function CustomerAddressCard() {
               value={formData.email}
               onChange={handleChange}
               className="w-full border p-2 rounded"
+              type="email"
             />
             <input
               name="phone"
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
+              defaultValue="+234"
+              type="tel"
               className="w-full border p-2 rounded"
             />
-            <textarea
+            <input
               name="address"
               placeholder="Address"
               value={formData.address}
@@ -125,10 +153,24 @@ export default function CustomerAddressCard() {
               className="w-full border p-2 rounded"
             />
 
+            <select
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              className="w-full border rounded px-3 py-2"
+              required
+            >
+              <option value="">Select State/Province</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Abuja">Abuja</option>
+              <option value="Kano">Kano</option>
+              <option value="Rivers">Rivers</option>
+            </select>
+
             <div className="flex justify-between pt-2">
               <button
                 onClick={handleSave}
-                className="bg-gray-600 text-white px-4 py-2 rounded"
+                className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-2 rounded"
               >
                 Save
               </button>
@@ -152,31 +194,38 @@ export default function CustomerAddressCard() {
         )}
 
         {!isEditing && (
-          // <button
-          //   onClick={handleCheckout}
-          //   className="mt-4 w-full bg-blue-600 text-white py-2 rounded"
-          // >
-          //   Checkout
-          // </button>
-          <div className="w-full border p-4 rounded shadow-sm">
-            <h2 className="font-semibold text-lg mb-4">Order Summary</h2>
-            <div className="flex justify-between text-sm mb-2">
-              <span>Subtotal</span>
-              <span>₦{total.toFixed(2)}</span>
+
+          <div >
+            <div className="w-full border p-4 mt-4 rounded shadow-sm">
+              <h2 className="font-semibold text-lg mb-4">Order Summary</h2>
+              <div className="flex justify-between text-sm mb-2">
+                <span>Subtotal</span>
+                <span>₦{total.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-base font-bold mb-4">
+                <span>
+                  Cart Total{" "}
+                  <span className="text-sm">({cart.length} items)</span>
+                </span>
+                <span>₦{total.toFixed(2)}</span>
+              </div>
+              <button
+                className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500"
+                onClick={handleCheckout}
+              >
+                CHECKOUT
+              </button>
             </div>
-            <div className="flex justify-between text-base font-bold mb-4">
-              <span>
-                Cart Total{" "}
-                <span className="text-sm">({cart.length} items)</span>
-              </span>
-              <span>₦{total.toFixed(2)}</span>
+
+            <div className="max-w-6xl mx-auto mt-10 bg-white border border-gray-200 p-6 rounded-md shadow">
+              <h2 className="font-medium">Shipping info</h2>
+              <p className="mt-2 mb-1">5 - 7 Business days shipping time</p>
+              <p className="font-semibold">₦{total.toFixed(2)}</p>
+              <p className="text-xs text-gray-500 mt-2">
+                Total Delivery Time = Production Time + Shipping Time
+              </p>
             </div>
-            <button
-              className="w-full bg-yellow-600 text-white py-2 rounded hover:bg-yellow-500"
-              onClick={handleCheckout}
-            >
-              CHECKOUT
-            </button>
+
           </div>
         )}
       </div>
