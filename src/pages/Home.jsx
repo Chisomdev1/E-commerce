@@ -47,7 +47,7 @@ const Home = () => {
                   <img
                     src={image}
                     alt={product_name}
-                    className="w-100 h-80 object-contain"
+                    className="w-100 h-100 object-contain"
                   />
                 </div>
                 <div className="bg-[#FEF9E9] p-4">
