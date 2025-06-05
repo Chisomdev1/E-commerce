@@ -29,15 +29,20 @@ const ProductDetail = () => {
     window.dispatchEvent(new Event("storage")); // Trigger update
   };
 
-  const [selectedColor, setSelectedColor] = useState(null); // Track the selected color
-
+  const [product, setProduct] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  
+  useEffect(() => {
+    if (product?.colors?.length && !selectedColor) {
+      setSelectedColor(product.colors[0]);
+    }
+  }, [product, selectedColor]);
   const [quantity, setQuantity] = useState(1);
 
   const increase = () => setQuantity((prev) => prev + 1);
   const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const stored = localStorage.getItem("products");
@@ -80,26 +85,26 @@ const ProductDetail = () => {
           <div className="mb-4">
             <span className="font-medium mr-2 inter">Color:</span>
             <div className="flex space-x-2">
-            {product?.colors?.map((color, idx) => (
-            <button
-              key={idx}
-              className="w-8 h-8 rounded border border-gray-400 relative"
-              style={{ backgroundColor: color.toLowerCase() }}
-              onClick={() => setSelectedColor(color)} // Set selected color
-            >
-              {selectedColor === color && (
-                <FaCheck
-                  className="absolute inset-0 m-auto"
-                  style={{
-                    color: color.toLowerCase() === "white" ? "black" : "white", // Check icon color
-                  }}
-                />
-              )}
-            </button>
-          ))}
+              {product?.colors?.map((color, idx) => (
+                <button
+                  key={idx}
+                  className="w-8 h-8 rounded border border-gray-400 relative"
+                  style={{ backgroundColor: color.toLowerCase() }}
+                  onClick={() => setSelectedColor(color)} // Set selected color
+                >
+                  {selectedColor === color && (
+                    <FaCheck
+                      className="absolute inset-0 m-auto"
+                      style={{
+                        color: color.toLowerCase() === "white" ? "black" : "white", // Check icon color
+                      }}
+                    />
+                  )}
+                </button>
+              ))}
             </div>
           </div>
-          
+
 
           {/* Quantity */}
           <div className="mt-4 inter mb-5">

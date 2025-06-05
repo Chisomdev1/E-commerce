@@ -56,21 +56,21 @@ export default function CustomerAddressCard() {
 
   const handleSave = (e) => {
     e.preventDefault();
-  
+
     // Email validation (simple regex)
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-  
+
     // Phone validation (Nigerian format, starts with +234 or 0 and 11 digits)
     const phoneRegex = /^(?:\+234|0)[789][01]\d{8}$/;
     if (!phoneRegex.test(formData.phone)) {
       toast.error("Please enter a valid Nigerian phone number.");
       return;
     }
-  
+
     // ...your save logic
     setIsEditing(false);
     toast.success("Information saved!");
@@ -85,7 +85,17 @@ export default function CustomerAddressCard() {
         },
         body: JSON.stringify(formData),
       });
-      localStorage.removeItem("cart"); // Clear the cart
+
+      // Calculate and save total before removing cart
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const total = cart.reduce((acc, item) => {
+        const price = typeof item.price === "number" ? item.price : 0;
+        const quantity = typeof item.quantity === "number" ? item.quantity : 0;
+        return acc + price * quantity;
+      }, 0);
+      localStorage.setItem("orderTotal", total); // Save total
+
+      localStorage.removeItem("cart"); // Now remove cart
       window.location.href = "/accountdetail";
     } catch {
       toast.error("Failed to send checkout info");
@@ -100,14 +110,14 @@ export default function CustomerAddressCard() {
         <div className="flex justify-between items-center mb-2">
           <h2 className="text-gray-700 font-semibold">CUSTOMER ADDRESS</h2>
           {!isEditing && (
-  <button
-    onClick={() => setIsEditing(true)}
-    className="text-orange-500 text-sm font-medium flex items-center gap-1"
-  >
-    <FaEdit className="inline-block" />
-    Change
-  </button>
-)}
+            <button
+              onClick={() => setIsEditing(true)}
+              className="text-orange-500 text-sm font-medium flex items-center gap-1"
+            >
+              <FaEdit className="inline-block" />
+              Change
+            </button>
+          )}
         </div>
 
         {isEditing ? (

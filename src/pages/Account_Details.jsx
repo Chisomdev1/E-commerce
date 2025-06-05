@@ -12,24 +12,14 @@ const PaymentInfo = () => {
     });
   };
 
-  const [cart, setCart] = useState([]);
+
+
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("cart")) || [];
-    const sanitized = stored.map((item) => ({
-      ...item,
-      price: typeof item.price === "number" ? item.price : 0,
-      quantity: typeof item.quantity === "number" ? item.quantity : 1,
-    }));
-    setCart(sanitized);
+    const storedTotal = Number(localStorage.getItem("orderTotal") || 0);
+    setTotal(storedTotal);
   }, []);
-
-  const total = cart.reduce((acc, item) => {
-    const price = typeof item.price === "number" ? item.price : 0;
-    const quantity = typeof item.quantity === "number" ? item.quantity : 0;
-    return acc + price * quantity;
-  }, 0);
-
   return (
     <div className="min-h-screen bg-[#fffdf5] flex flex-col justify-between">
 
@@ -106,8 +96,10 @@ const PaymentInfo = () => {
               Please kindly transfer the exact amount of{" "}
               <span className="text-yellow-600 font-medium">{total.toFixed(2)}</span> to avoid cancellation of your order, and click{" "}
               <a
-                href="https://wa.me/2348020895339?text=Hello%2C%20I%20just%20made%20a%20payment%20of%20%E2%82%A6<span>₦{Number(product.price).toFixed(2)}</span>%20to%20Omoflexy%20Bead%20Empire."
-                target="_blank"
+               href={`https://wa.me/2348020895339?text=${encodeURIComponent(
+                `Hello, I just made a payment of ₦${total.toFixed(2)} to Omoflexy Bead Empire.`
+              )}`}
+               target="_blank"
                 rel="noopener noreferrer"
                 className="text-yellow-600 font-medium underline cursor-pointer"
               >

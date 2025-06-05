@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Recommendation from "../components/Recommendation";
 import Footer from "../components/Footer";
-import { getProducts } from "../utils/LocalStorage"; // or your actual import
 import { ToastContainer, toast } from 'react-toastify'
 
 
@@ -25,10 +24,6 @@ export default function Checkout() {
     setCart(sanitized);
   }, []);
 
-  const colors = cart.map(item => {
-    const product = getProducts().find(p => p.id === item.id);
-    return product?.colors || [];
-  });
 
   const updateCart = (newCart) => {
     setCart(newCart);
@@ -70,73 +65,63 @@ export default function Checkout() {
       <Navbar />
       <div className="flex flex-col md:flex-row mt-[7rem] p-4 gap-6 inter">
 
-      <ToastContainer toastClassName="poppins" />
+        <ToastContainer toastClassName="poppins" />
 
         {/* Cart Items */}
         {cart.length === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
           <>
-            <ul className="space-y-4">
-              {cart.map((item, idx) => (
-                <li
+            <div className="space-y-4 md:w-[80%]">
+              {cart.map((item) => (
+                <div
                   key={item.id}
-                  className="border p-4 rounded shadow-sm flex items-center justify-between gap-4"
+                  className="border-b-2 gap-4"
                 >
-                  <img
-                    src={item.product_image}
-                    alt={item.product_name}
-                    className="w-20 h-20 object-cover rounded"
-                  />
-                  <div className="flex-1">
-                    <h2 className="font-medium text-lg">
-                      {item.product_name}
-                    </h2>
-                    <p className="text-sm text-gray-500">
-                      Color:
-                      <select
-                        value={item.color}
-                        onChange={e => {
-                          const newColor = e.target.value;
-                          // Update cart state and localStorage
-                          const updatedCart = [...cart];
-                          updatedCart[idx] = { ...item, color: newColor };
-                          setCart(updatedCart);
-                          localStorage.setItem("cart", JSON.stringify(updatedCart));
-                          window.dispatchEvent(new Event("storage"));
-                        }}
-                        className="ml-2 border rounded px-2 py-1"
+                  <div className="items-center justify-between flex">
+                    <img
+                      src={item.product_image}
+                      alt={item.product_name}
+                      className="w-20 h-20 object-cover rounded mr-2"
+                    />
+                    <div className="flex-1">
+                      <h2 className="font-medium md:text-lg text-[15px] flex">
+                        {item.product_name}
+                      </h2>
+                      
+                      <p className="text-sm text-gray-500 flex items-center gap-2">
+                        <div className="inline-block px-1 rounded border-2">
+                          <span className="capitalize">Color - {item.color}</span>
+                        </div>
+
+                      </p>
+                      
+                    </div>
+
+                    <div className="text-right font-medium md:w-24 w-18 md:mr-7 mr-2">
+                      {(item.price * item.quantity).toFixed(2)}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => decreaseQty(item.id)}
+                        className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
                       >
-                        {colors.map(color => (
-                          <option key={color} value={color}> {color}</option>
-                        ))}
-                      </select>
-                    </p>
-                    <p className="text-sm text-gray-600 inline-flex items-center">
-                      Price: {item.price.toFixed(2)}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => decreaseQty(item.id)}
-                      className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
-                    >
-                      -
-                    </button>
-                    <span>{item.quantity}</span>
-                    <button
-                      onClick={() => increaseQty(item.id)}
-                      className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div className="text-right font-medium w-24">
-                    {(item.price * item.quantity).toFixed(2)}
+                        -
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button
+                        onClick={() => increaseQty(item.id)}
+                        className="bg-gray-300 px-2 py-1 rounded hover:bg-gray-400"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
 
 
-                  <div className="text-sm text-gray-500 mt-2 justify-end flex gap-4">
+                  <br />
+
+                  <div className="w-full flex justify-end mb-2">
                     <button
                       onClick={() => removeItem(item.id)}
                       className="text-red-500 hover:text-red-700 text-sm inline-block"
@@ -144,9 +129,9 @@ export default function Checkout() {
                       Delete
                     </button>
                   </div>
-                </li>
+                </div>
               ))}
-            </ul>
+            </div>
           </>
         )}
 
