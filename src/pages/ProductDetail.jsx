@@ -54,8 +54,11 @@ const ProductDetail = () => {
       {/* Main Product Section */}
       <main className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto mt-[7rem]">
         {/* Product Image */}
-        <div className="flex items-center justify-center bg-yellow-50 p-12">
-          <div className="bg-gray-200 w-60 h-60 flex items-center justify-center text-gray-400 text-4xl">
+        <div className="flex">
+          <div className="w-[100%] h-[100%] flex text-gray-400 text-4xl relative">
+            <span className="absolute top-2 left-2 bg-[#F4EBD0] text-white text-xs px-1 py-1 rounded-[4px]">
+              🔥
+            </span>
             <img src={product.product_image} alt="" />
           </div>
         </div>

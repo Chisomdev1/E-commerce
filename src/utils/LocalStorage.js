@@ -1,76 +1,106 @@
-import beadedBracelet from '../assets/image/beaded-bracelet1.jpg';
+import Bracelet1 from '../assets/image/Bracelet1.jpeg';
+import Bracelet2 from '../assets/image/Bracelet2.jpeg';
+import Bracelet3 from '../assets/image/Bracelet3.jpeg';
+import Necklace1 from '../assets/image/Necklace1.jpeg';
+import Necklace2 from '../assets/image/Necklace2.jpeg';
+import Necklace3 from '../assets/image/Necklace3.jpeg';
+import beadedTop1 from '../assets/image/beadedTop1.jpeg';
+import beadedTop2 from '../assets/image/beadedTop2.jpeg';
+import beadedBag1 from '../assets/image/beadedBag1.jpeg';
+import beadedBag2 from '../assets/image/beadedBag2.jpeg';
+
 
 export const initializeProducts = () => {
   const products = [
     {
       id: 1,
-      product_name: "Laptop",
-      category: "Electronics",
+      product_name: "Beaded Bracelet",
+      category: "Beaded Bracelet",
       description: "A high-performance laptop for work and play.",
-      price: 5200,
-      product_image: beadedBracelet, // Use a public path or static folder
+      price: 11200,
+      product_image: Bracelet1, // Use a public path or static folder
     },
+
     {
       id: 2,
-      product_name: "Running Shoes",
-      category: "Footwear",
+      product_name: "Necklace",
+      category: "Beaded Necklace",
       description: "Comfortable shoes for daily runs.",
-      price: 80,
-      image: "./assets/image/beaded_bag.jpg", // Use a public path or static folder
+      price: 9500,
+      product_image: Necklace1, // Use a public path or static folder
     },
+
     {
       id: 3,
-      product_name: "Coffee Maker",
-      category: "Appliances",
+      product_name: "Beaded Top",
+      category: "Beaded Top",
       description: "Brew the perfect cup of coffee every morning.",
       price: 100,
-      product_image: "/assets/image/beaded_bag.jpg",
+      product_image: beadedTop1,
     },
+
     {
       id: 4,
-      product_name: "Backpack",
-      category: "Accessories",
+      product_name: "Beaded Bag",
+      category: "Beaded Bag",
       description: "Durable and spacious for daily use.",
       price: 45,
-      product_image: "/assets/image/beaded_bag.jpg",
+      product_image: beadedBag1,
     },
 
     {
       id: 5,
-      product_name: "Puma",
-      category: "Footwear",
-      description: "Comfortable shoes for daily runs.",
-      price: 2900,
-      product_image: "/assets/image/beaded_bag.jpg",
+      product_name: "Beaded Bracelet",
+      category: "Beaded Bracelet",
+      description: "A high-performance laptop for work and play.",
+      price: 15000,
+      product_image: Bracelet2, // Use a public path or static folder
     },
 
     {
       id: 6,
-      product_name: "Phone",
-      category: "Electronics",
-      description: "A high-performance laptop for work and play.",
-      price: 25000,
-      product_image: "/assets/image/beaded_bag.jpg", // Use a public path or static folder
+      product_name: "Necklace",
+      category: "Beaded Necklace",
+      description: "Comfortable shoes for daily runs.",
+      price: 5000,
+      product_image: Necklace2, // Use a public path or static folder
     },
 
     {
       id: 7,
-      product_name: "Washing machine",
-      category: "Appliances",
+      product_name: "Beaded Top",
+      category: "Beaded Top",
       description: "Brew the perfect cup of coffee every morning.",
       price: 10000,
-      product_image: "/assets/image/beaded_bag.jpg",
+      product_image: beadedTop2,
     },
 
     {
       id: 8,
-      product_name: "Necklace",
-      category: "Accessories",
+      product_name: "Beaded Bag",
+      category: "Beaded Bag",
       description: "Durable and spacious for daily use.",
-      price: 5000,
-      product_image: "/assets/image/beaded_bag.jpg",
+      price: 9400,
+      product_image: beadedBag2,
     },
 
+    {
+      id: 9,
+      product_name: "Beaded Bracelet",
+      category: "Beaded Bracelet",
+      description: "A high-performance laptop for work and play.",
+      price: 12500,
+      product_image: Bracelet3, // Use a public path or static folder
+    },
+
+    {
+      id: 10,
+      product_name: "Necklace",
+      category: "Beaded Necklace",
+      description: "Comfortable shoes for daily runs.",
+      price: 9500,
+      product_image: Necklace3, // Use a public path or static folder
+    },
   ];
 
   localStorage.setItem("products", JSON.stringify(products));

@@ -21,7 +21,7 @@ const Recommendation = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {products.slice(0, 4).map(
           ({ id, product_name, category, price, product_image }) => (
-            <Link to={`/product/${id}`} key={id} className="">
+            <a href={`/product/${id}`} key={id} className="">
               <div className="w-full h-40 bg-white flex items-center justify-center mb-4 relative">
                 <span className="absolute top-2 left-2 bg-[#F4EBD0] text-white text-xs px-1 py-1 rounded-[4px]">
                   🔥
@@ -29,7 +29,7 @@ const Recommendation = () => {
                 <img
                   src={product_image}
                   alt={product_name}
-                  className="w-50 h-20"
+                  className="w-[100%] h-[100%]"
                 />
               </div>
               <div className="bg-[#FEF9E9] p-4">
@@ -41,7 +41,7 @@ const Recommendation = () => {
                   <p className="text-gray-700 text-xs inter">{category}</p>
                 </div>
               </div>
-            </Link>
+            </a>
           )
         )}
       </div>
