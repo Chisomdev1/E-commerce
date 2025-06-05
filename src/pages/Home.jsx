@@ -54,7 +54,7 @@ const Home = () => {
               <Link to={`/product/${id}`} key={id}
                 className=""
               >
-                <div className="w-full h-40 bg-white flex items-center justify-center mb-4 relative">
+                <div className="w-full h-40 bg-white flex items-center justify-center relative">
                   <span className="absolute top-2 left-2 bg-[#F4EBD0] text-white text-xs px-1 py-1 rounded-[4px]">
                     🔥
                   </span>
