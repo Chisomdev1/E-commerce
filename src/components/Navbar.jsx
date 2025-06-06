@@ -93,7 +93,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Category Scroll Menu */}
-        <div className="md:hidden flex w-full justify-center py-2 space-x-2 border-t text-[13px] font-medium poppins">
+        <div className="md:hidden flex w-full justify-center py-2 space-x-3 border-t text-[13px] font-medium poppins">
           <button
             className="whitespace-nowrap"
             onClick={() => navigate(`/search?q=Beaded Bag`)}
