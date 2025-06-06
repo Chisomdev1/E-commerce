@@ -71,6 +71,13 @@ export default function CustomerAddressCard() {
       return;
     }
 
+    if (!formData.state) {
+      toast.error("Please select a state/province.");
+      return;
+    }
+
+    localStorage.setItem("customerInfo", JSON.stringify(formData));
+
     // ...your save logic
     setIsEditing(false);
     toast.success("Information saved!");
@@ -78,24 +85,35 @@ export default function CustomerAddressCard() {
 
   const handleCheckout = async () => {
     try {
+      // Get cart and filter out image
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartSummary = cart.map(item => ({
+        id: item.id,
+        product_name: item.product_name,
+        category: item.category,
+        price: item.price,
+        quantity: item.quantity,
+        color: item.color,
+      }));
+  
+      // Combine form data and cart summary
+      const payload = {
+        ...formData,
+        cart: cartSummary,
+      };
+  
       await fetch("https://formspree.io/f/mldnezze", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
-
+  
       // Calculate and save total before removing cart
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const total = cart.reduce((acc, item) => {
-        const price = typeof item.price === "number" ? item.price : 0;
-        const quantity = typeof item.quantity === "number" ? item.quantity : 0;
-        return acc + price * quantity;
-      }, 0);
+      localStorage.setItem("orderSummary", JSON.stringify(cartSummary)); // Save summary
       localStorage.setItem("orderTotal", total); // Save total
-
-      localStorage.removeItem("cart"); // Now remove cart
+      localStorage.removeItem("cart"); // Remove cart
       window.location.href = "/accountdetail";
     } catch {
       toast.error("Failed to send checkout info");
@@ -200,6 +218,7 @@ export default function CustomerAddressCard() {
             <p className="text-gray-600 truncate">{formData.address}</p>
             <p className="text-gray-600">{formData.email}</p>
             <p className="text-gray-600">{formData.phone}</p>
+            <p className="text-gray-600">{formData.state}</p>
           </div>
         )}
 

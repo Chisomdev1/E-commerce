@@ -20,6 +20,34 @@ const PaymentInfo = () => {
     const storedTotal = Number(localStorage.getItem("orderTotal") || 0);
     setTotal(storedTotal);
   }, []);
+
+  const [customerInfo, setCustomerInfo] = useState({ firstName: "", lastName: "" });
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("customerInfo")) || {};
+    setCustomerInfo(saved);
+  }, []);
+
+  const customerName = `${customerInfo.firstName} ${customerInfo.lastName}`;
+
+  const [orderSummary, setOrderSummary] = useState([]);
+
+  useEffect(() => {
+    const summary = JSON.parse(localStorage.getItem("orderSummary")) || [];
+    setOrderSummary(summary);
+    setTotal(Number(localStorage.getItem("orderTotal") || 0));
+  }, []);
+  const productLines = orderSummary.map(
+    item =>
+      `\n- ${item.product_name} (${item.color}), ₦${Number(item.price).toFixed(2)} x${item.quantity}`
+  ).join("");
+
+  const message = `Hello, I just made a payment of ₦${total.toFixed(2)} to Omoflexy Bead Empire,
+  my Name is ${customerName}
+  Products:${productLines}`;
+
+  const whatsappLink = `https://wa.me/2348020895339?text=${encodeURIComponent(message)}`;
+
   return (
     <div className="min-h-screen bg-[#fffdf5] flex flex-col justify-between">
 
@@ -96,10 +124,8 @@ const PaymentInfo = () => {
               Please kindly transfer the exact amount of{" "}
               <span className="text-yellow-600 font-medium">{total.toFixed(2)}</span> to avoid cancellation of your order, and click{" "}
               <a
-               href={`https://wa.me/2348020895339?text=${encodeURIComponent(
-                `Hello, I just made a payment of ₦${total.toFixed(2)} to Omoflexy Bead Empire.`
-              )}`}
-               target="_blank"
+                href={whatsappLink}
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-yellow-600 font-medium underline cursor-pointer"
               >
