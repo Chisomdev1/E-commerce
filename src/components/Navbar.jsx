@@ -61,25 +61,25 @@ const Navbar = () => {
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-4 items-center poppins">
               <button
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-[#D4AF37]"
                 onClick={() => navigate(`/search?q=Beaded Bag`)}
               >
                 Beaded Bags |
               </button>
               <button
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-[#D4AF37]"
                 onClick={() => navigate(`/search?q=Beaded Bracelet`)}
               >
                 Beaded Bracelet |
               </button>
               <button
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-[#D4AF37]"
                 onClick={() => navigate(`/search?q=Beaded Necklace`)}
               >
                 Beaded Necklace |
               </button>
               <button
-                className="text-gray-700 hover:text-blue-600"
+                className="text-gray-700 hover:text-[#D4AF37]"
                 onClick={() => navigate(`/search?q=Beaded Top`)}
               >
                 Beaded Top
@@ -182,7 +182,7 @@ const Navbar = () => {
             </svg>
           </a>
           <a
-            href="https://wa.me/2348020895339" // Replace with your WhatsApp number
+            href="https://wa.me/2349037768161" // Replace with your WhatsApp number
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center text-sm text-gray-700"
