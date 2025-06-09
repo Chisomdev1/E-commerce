@@ -46,7 +46,7 @@ const PaymentInfo = () => {
   my Name is ${customerName}
   Products:${productLines}`;
 
-  const whatsappLink = `https://wa.me/2348020895339?text=${encodeURIComponent(message)}`;
+  const whatsappLink = `https://wa.me/2349037768161?text=${encodeURIComponent(message)}`;
 
   return (
     <div className="min-h-screen bg-[#fffdf5] flex flex-col justify-between">

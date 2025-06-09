@@ -102,7 +102,7 @@ export default function CustomerAddressCard() {
         cart: cartSummary,
       };
   
-      await fetch("https://formspree.io/f/mldnezze", {
+      await fetch("https://formspree.io/f/xkgbjvwy", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
